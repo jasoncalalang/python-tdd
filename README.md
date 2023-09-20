@@ -1,33 +1,48 @@
-## TDD Exercise
+# TDD Exercise
 
-This README file describes a TDD exercise using Python.
+This repository contains the source code for my Python project, which follows best practices in testing with `pytest` and automatic test re-runs using `pytest-watch`.
 
-**Goal:** Write a function called `add_numbers()` that takes two numbers as input and returns their sum.
+## Prerequisites
+ - Python (e.g., 3.8+)
+ - Virtual environment (optional but recommended)
 
-**Steps:**
-
-1. Create a new Python file called `exercise.py`.
-1. Add the following code to the file:
-```python
-def add_numbers(a, b):
-    return a + b
+## Setting Up the Development Environment
+1. Clone the repository
+```bash
+git clone <repository_url>
+cd <repository_directory>
 ```
-1. Create a new file called test_exercise.py.
-1. Add the following code to the file:
-```python
-import unittest
+2. Set up a virtual environment (recommended)
+```bash
+python -m venv venv
+```
+  Activate the virtual environment:
+  - Windows:
+  ```bash
+  .\venv\Scripts\activate
+  ```
+  - macOS and Linux:
+  ```bash
+  source /venv/bin/activate
+  ```
 
-class TestAddNumbers(unittest.TestCase):
-    def test_add_numbers(self):
-        self.assertEqual(add_numbers(1, 2), 3)
+3. Install the project dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-if __name__ == '__main__':
-    unittest.main()
+## Running Tests
+1. Using `pytest` directly:
+```bash
+pytest
 ```
-1. Run the tests by executing the following command:
+2. Using pytest-watch for automatic test re-runs:
+If you want to automatically re-run the tests whenever a source file changes:
+```bash
+ptw
 ```
-python test_exercise.py
+Or, if you want the screen to clear before each test run:
+```bash
+ptw --runner "clear && pytest"
 ```
-1. The tests should fail, because the `add_numbers()` function is not yet implemented.
-1. Implement the add_`numbers()` function so that the tests pass.
-1. Run the tests again to verify that they pass.
+(Replace `clear` with `cls` on Windows.)
