@@ -2,19 +2,25 @@ import unittest
 
 class Stack:
     def __init__(self):
-        pass
+        self.items = []
 
     def push(self, item):
-        pass
+        self.items.append(item)
 
     def pop(self):
-        pass
+        if not self.is_empty():
+            return self.items.pop()
+        else:
+            raise IndexError("pop from empty stack")
 
     def peek(self):
-        pass
+        if not self.is_empty():
+            return self.items[-1]
+        else:
+            raise IndexError("peek from empty stack")
 
     def is_empty(self):
-        pass
+        return len(self.items) == 0
 
 class TestStack(unittest.TestCase):
     def test_is_empty(self):
