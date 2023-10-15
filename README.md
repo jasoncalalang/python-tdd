@@ -9,8 +9,8 @@ This repository contains the source code for my Python project, which follows be
 ## Setting Up the Development Environment
 1. Clone the repository
 ```bash
-git clone <repository_url>
-cd <repository_directory>
+git clone https://github.com/jasoncalalang/python-tdd python-tdd
+cd python-tdd
 ```
 2. Set up a virtual environment (recommended)
 ```bash
