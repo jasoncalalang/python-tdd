@@ -1,39 +1,57 @@
 import unittest
 
-def is_valid_luhn(number: str) -> bool:
-    if not number.isdigit():
-        raise ValueError("Input must be a numeric string")
-        
-    digits = [int(digit) for digit in number]
-    checksum = 0
+class Stack:
+    def __init__(self):
+        self.items = []
 
-    # Double every second digit from the right and add the individual digits to the checksum
-    for i in range(-2, -len(digits) - 1, -2):
-        double_digit = digits[i] * 2
-        checksum += double_digit if double_digit < 10 else double_digit - 9
+    def is_empty(self):
+        return len(self.items) == 0
 
-    # Add the other digits to the checksum
-    checksum += sum(digits[-1::-2])
+    def push(self, item):
+        self.items.append(item)
 
-    return checksum % 10 == 0
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("pop from empty stack")
+        return self.items.pop()
 
-class TestLuhnAlgorithm(unittest.TestCase):
-    
-    def test_valid_luhn(self):
-        self.assertTrue(is_valid_luhn('79927398713'))
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("peek from empty stack")
+        return self.items[-1]
 
-    def test_invalid_luhn(self):
-        self.assertFalse(is_valid_luhn('79927398712'))
+class TestStack(unittest.TestCase):
+    def test_is_empty(self):
+        stack = Stack()
+        self.assertTrue(stack.is_empty())
 
-    def test_valid_credit_card(self):
-        self.assertTrue(is_valid_luhn('4532015112830366'))
+    def test_push_and_peek(self):
+        stack = Stack()
+        stack.push(1)
+        self.assertEqual(stack.peek(), 1)
 
-    def test_invalid_credit_card(self):
-        self.assertFalse(is_valid_luhn('1234567812345670'))
+    def test_push_and_pop(self):
+        stack = Stack()
+        stack.push(1)
+        self.assertEqual(stack.pop(), 1)
+        self.assertTrue(stack.is_empty())
 
-    def test_non_numeric_string(self):
-        with self.assertRaises(ValueError):
-            is_valid_luhn('invalid')
+    def test_pop_empty(self):
+        stack = Stack()
+        with self.assertRaises(IndexError):
+            stack.pop()
+
+    def test_peek_empty(self):
+        stack = Stack()
+        with self.assertRaises(IndexError):
+            stack.peek()
+
+    def test_push_pop_push(self):
+        stack = Stack()
+        stack.push(1)
+        stack.pop()
+        stack.push(2)
+        self.assertEqual(stack.peek(), 2)
 
 if __name__ == '__main__':
     unittest.main()
